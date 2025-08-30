@@ -12,47 +12,47 @@ namespace WeatherForecast.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TraineeController : ControllerBase
+    public class CourseController : ControllerBase
     {
         private readonly TraineeContext _context;
 
-        public TraineeController(TraineeContext context)
+        public CourseController(TraineeContext context)
         {
             _context = context;
         }
 
-        // GET: api/Trainee
+        // GET: api/Course
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Trainee>>> GetTrainees()
+        public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
         {
-            return await _context.Trainees.ToListAsync();
+            return await _context.Courses.ToListAsync();
         }
 
-        // GET: api/Trainee/5
+        // GET: api/Course/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Trainee>> GetTrainee(int id)
+        public async Task<ActionResult<Course>> GetCourse(int id)
         {
-            var trainee = await _context.Trainees.FindAsync(id);
+            var course = await _context.Courses.FindAsync(id);
 
-            if (trainee == null)
+            if (course == null)
             {
                 return NotFound();
             }
 
-            return trainee;
+            return course;
         }
 
-        // PUT: api/Trainee/5
+        // PUT: api/Course/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTrainee(int id, Trainee trainee)
+        public async Task<IActionResult> PutCourse(int id, Course course)
         {
-            if (id != trainee.Id)
+            if (id != course.CourseID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(trainee).State = EntityState.Modified;
+            _context.Entry(course).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace WeatherForecast.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TraineeExists(id))
+                if (!CourseExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace WeatherForecast.Controllers
             return NoContent();
         }
 
-        // POST: api/Trainee
+        // POST: api/Course
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Trainee>> PostTrainee(Trainee trainee)
+        public async Task<ActionResult<Course>> PostCourse(Course course)
         {
-            _context.Trainees.Add(trainee);
+            _context.Courses.Add(course);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTrainee", new { id = trainee.Id }, trainee);
+            return CreatedAtAction("GetCourse", new { id = course.CourseID }, course);
         }
 
-        // DELETE: api/Trainee/5
+        // DELETE: api/Course/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTrainee(int id)
+        public async Task<IActionResult> DeleteCourse(int id)
         {
-            var trainee = await _context.Trainees.FindAsync(id);
-            if (trainee == null)
+            var course = await _context.Courses.FindAsync(id);
+            if (course == null)
             {
                 return NotFound();
             }
 
-            _context.Trainees.Remove(trainee);
+            _context.Courses.Remove(course);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool TraineeExists(int id)
+        private bool CourseExists(int id)
         {
-            return _context.Trainees.Any(e => e.Id == id);
+            return _context.Courses.Any(e => e.CourseID == id);
         }
     }
 }

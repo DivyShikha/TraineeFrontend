@@ -1,5 +1,5 @@
-using WeatherForecast.Model;
 using Microsoft.EntityFrameworkCore;
+using WeatherForecast.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

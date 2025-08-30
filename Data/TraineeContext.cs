@@ -1,7 +1,8 @@
 ﻿using System.Data;
 using Microsoft.EntityFrameworkCore;
+using WeatherForecast.Model;
 
-namespace WeatherForecast.Model
+namespace WeatherForecast.Data
 {
     public class TraineeContext : DbContext
     {
@@ -9,6 +10,8 @@ namespace WeatherForecast.Model
         { 
         }
         public DbSet<Trainee> Trainees { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Enrolment> Enrolments { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

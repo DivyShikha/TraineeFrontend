@@ -12,47 +12,47 @@ namespace WeatherForecast.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TraineeController : ControllerBase
+    public class EnrolmentController : ControllerBase
     {
         private readonly TraineeContext _context;
 
-        public TraineeController(TraineeContext context)
+        public EnrolmentController(TraineeContext context)
         {
             _context = context;
         }
 
-        // GET: api/Trainee
+        // GET: api/Enrolment
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Trainee>>> GetTrainees()
+        public async Task<ActionResult<IEnumerable<Enrolment>>> GetEnrolments()
         {
-            return await _context.Trainees.ToListAsync();
+            return await _context.Enrolments.ToListAsync();
         }
 
-        // GET: api/Trainee/5
+        // GET: api/Enrolment/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Trainee>> GetTrainee(int id)
+        public async Task<ActionResult<Enrolment>> GetEnrolment(int id)
         {
-            var trainee = await _context.Trainees.FindAsync(id);
+            var enrolment = await _context.Enrolments.FindAsync(id);
 
-            if (trainee == null)
+            if (enrolment == null)
             {
                 return NotFound();
             }
 
-            return trainee;
+            return enrolment;
         }
 
-        // PUT: api/Trainee/5
+        // PUT: api/Enrolment/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTrainee(int id, Trainee trainee)
+        public async Task<IActionResult> PutEnrolment(int id, Enrolment enrolment)
         {
-            if (id != trainee.Id)
+            if (id != enrolment.EnrollmentID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(trainee).State = EntityState.Modified;
+            _context.Entry(enrolment).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace WeatherForecast.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TraineeExists(id))
+                if (!EnrolmentExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace WeatherForecast.Controllers
             return NoContent();
         }
 
-        // POST: api/Trainee
+        // POST: api/Enrolment
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Trainee>> PostTrainee(Trainee trainee)
+        public async Task<ActionResult<Enrolment>> PostEnrolment(Enrolment enrolment)
         {
-            _context.Trainees.Add(trainee);
+            _context.Enrolments.Add(enrolment);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTrainee", new { id = trainee.Id }, trainee);
+            return CreatedAtAction("GetEnrolment", new { id = enrolment.EnrollmentID }, enrolment);
         }
 
-        // DELETE: api/Trainee/5
+        // DELETE: api/Enrolment/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTrainee(int id)
+        public async Task<IActionResult> DeleteEnrolment(int id)
         {
-            var trainee = await _context.Trainees.FindAsync(id);
-            if (trainee == null)
+            var enrolment = await _context.Enrolments.FindAsync(id);
+            if (enrolment == null)
             {
                 return NotFound();
             }
 
-            _context.Trainees.Remove(trainee);
+            _context.Enrolments.Remove(enrolment);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool TraineeExists(int id)
+        private bool EnrolmentExists(int id)
         {
-            return _context.Trainees.Any(e => e.Id == id);
+            return _context.Enrolments.Any(e => e.EnrollmentID == id);
         }
     }
 }
